@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "type": "module",
+  "exports": {
+    "./*": "./*",
+    "./shared/*": "./src/shared/*",
+    "./shared": "./src/shared/index.ts"
+  },
+  "scripts": {
+    "dev:server": "bun run src/server/index.ts",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit",
+    "schema-type-check": "tsc -p ./tsconfig.schema.json",
+    "studio": "bunx drizzle-kit studio --host 0.0.0.0 --port 8989 --verbose",
+    "apply-migrations": "migrate -path migrations -database $DATABASE_URL up",
+    "force-migration-version": "migrate -path migrations -database $DATABASE_URL force",
+    "get-current-migration-version": "migrate -path migrations -database $DATABASE_URL version"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.10",
+    "dotenv": "^17.2.1",
+    "drizzle-introspect": "git+https://github.com/KatIsCoding/drizzle-introspection.git",
+    "drizzle-kit": "^0.31.4",
+    "drizzle-orm": "^0.44.4",
+    "postgres": "^3.4.7",
+    "postgres-js": "^0.1.0",
+    "zod": "^3.24.2",
+    "zynapse": "^0.1.15"
+  },
+  "devDependencies": {
+    "@types/bun": "1.1.12",
+    "@types/node": "^24.3.1",
+    "@typescript/native-preview": "^7.0.0-dev.20250709.1",
+    "eslint": "^9.21.0",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.49.0"
+  },
+  "version": "11.1.0",
+  "trustedDependencies": []
+}
