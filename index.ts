@@ -85,7 +85,7 @@ const activeLogStreams: {
 	frontend: new Set(),
 };
 
-async function reassignFrontendProcess() {
+async function reassignFrontendProcess(enviroment: Record<string, string>) {
 	if (processes.frontend) {
 		const p = processes["frontend"];
 		p.kill("SIGKILL");
@@ -102,6 +102,7 @@ async function reassignFrontendProcess() {
 		stderr: "pipe",
 		env: {
 			...process.env,
+			...enviroment,
 			FORCE_COLOR: "1",
 			COLORTERM: "truecolor",
 		},
@@ -231,12 +232,13 @@ async function setupLogCapture(
 type GetProcessInfo = {
 	type: ProcessType;
 	envVars: Record<string, string>;
+	frontendVars: Record<string, string>;
 };
 
 // First ever call so that the processes start.
 // prismaStudioProcess = await startPrismaStudio();
 await reassignBackendProcess({}); // Initially without env variables because later will be collected from restart process.
-await reassignFrontendProcess();
+await reassignFrontendProcess({});
 const client = postgres(process.env.DATABASE_URL!);
 const executor = createPostgresJSExecutor(client, {
 	logging: true,
@@ -351,7 +353,7 @@ const s = Bun.serve({
 			if (body.type === "backend") {
 				await reassignBackendProcess(body.envVars);
 			} else if (body.type === "frontend") {
-				await reassignFrontendProcess();
+				await reassignFrontendProcess(body.frontendVars);
 			} else {
 				return new Response("invalid type", {
 					status: 404,
