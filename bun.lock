@@ -7,7 +7,7 @@
       "dependencies": {
         "@prisma/studio-core": "^0.5.1",
         "chokidar": "^4.0.3",
-        "zynapse": "^0.1.15",
+        "zynapse": "^0.1.16-staging.f9a4ddb",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -31,7 +31,7 @@
         "postgres": "^3.4.7",
         "postgres-js": "^0.1.0",
         "zod": "^3.24.2",
-        "zynapse": "^0.1.15",
+        "zynapse": "^0.1.16-staging.f9a4ddb",
       },
       "devDependencies": {
         "@types/bun": "1.1.12",
@@ -1944,7 +1944,7 @@
 
     "zod-to-ts": ["zod-to-ts@1.2.0", "", { "peerDependencies": { "typescript": "^4.9.4 || ^5.0.2", "zod": "^3" } }, "sha512-x30XE43V+InwGpvTySRNz9kB7qFU8DlyEy7BsSTCHPH1R0QasMmHWZDCzYm6bVXtj/9NNJAZF3jW8rzFvH5OFA=="],
 
-    "zynapse": ["zynapse@0.1.15", "", { "dependencies": { "json-schema-to-zod": "^2.7.0", "prettier": "^3.7.4", "zod": "^3.25.76", "zod-to-json-schema": "^3.25.1", "zod-to-ts": "^1.2.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "zynapse-cli": "dist/cli/index.js" } }, "sha512-0l/sOhIo/91RqDvY4T2EZwE+52DR1pKzs40umQlxkhNrlzOm0s0uwoDRq5L1OPZH3wISH/8cQG0vLq1Qm2M52w=="],
+    "zynapse": ["zynapse@0.1.16-staging.f9a4ddb", "", { "dependencies": { "json-schema-to-zod": "^2.7.0", "prettier": "^3.7.4", "zod": "^3.25.76", "zod-to-json-schema": "^3.25.1", "zod-to-ts": "^1.2.0" }, "peerDependencies": { "typescript": "^5" }, "bin": { "zynapse-cli": "dist/cli/index.js" } }, "sha512-4ku7/qNxXXlZRhbUWSyL6PCevRqq60EMlLLij92mgg+Ibn3yhNEjnyMyW9CtRdmJ7hc/hOpHnVb3cxJNrRj4nw=="],
 
     "@babel/core/@babel/traverse": ["@babel/traverse@7.28.4", "", { "dependencies": { "@babel/code-frame": "^7.27.1", "@babel/generator": "^7.28.3", "@babel/helper-globals": "^7.28.0", "@babel/parser": "^7.28.4", "@babel/template": "^7.27.2", "@babel/types": "^7.28.4", "debug": "^4.3.1" } }, "sha512-YEzuboP2qvQavAcjgQNVgsvHIDv6ZpwXvcvjmyySP2DIMuByS/6ioU5G9pYrWHM6T2YDfc7xga9iNzYOs12CFQ=="],
 
