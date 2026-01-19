@@ -88,7 +88,8 @@ const activeLogStreams: {
 async function reassignFrontendProcess(enviroment: Record<string, string>) {
 	if (processes.frontend) {
 		const p = processes["frontend"];
-		p.kill("SIGKILL");
+		p.kill();
+		console.log("Frontend kill response: ", await Bun.$`kill ${p.pid}`.text());
 		console.log("Waiting for frontend process to die..");
 		await p.exited;
 		await waitForExit(p.pid, 5_000, "Frontend");
