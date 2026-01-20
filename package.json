@@ -29,6 +29,6 @@
   "dependencies": {
     "@prisma/studio-core": "^0.5.1",
     "chokidar": "^4.0.3",
-    "zynapse": "^0.1.16-staging.593d157"
+    "zynapse": "^0.1.16-staging.55432e7"
   }
 }

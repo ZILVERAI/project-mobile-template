@@ -1,4 +1,13 @@
-import { useMutation, UseMutationOptions , useQuery, UseQueryOptions } from "@tanstack/react-query";
+const getApiBaseUrl = () => {
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+  if (!baseUrl) {
+    throw new Error("EXPO_PUBLIC_API_URL environment variable is not set");
+  }
+  return baseUrl.replace(/\/$/, "");
+};
+
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import EventSource from "react-native-sse";
 import {
@@ -7,14 +16,6 @@ import {
   UseWebSocketOptions,
 } from "./useWebsocketMobile";
 import { z } from "zod";
-
-const getApiBaseUrl = () => {
-  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
-  if (!baseUrl) {
-    throw new Error("EXPO_PUBLIC_API_URL environment variable is not set");
-  }
-  return baseUrl.replace(/\/$/, "");
-};
 
 // ---- Service Name: Todo ----
 export const TodoGetTodosQueryInputSchema = z
@@ -37,7 +38,7 @@ export function useTodoGetTodosQuery(
       TodoGetTodosOutputType,
       Error,
       TodoGetTodosOutputType,
-      (string | z.infer<typeof TodoGetTodosQueryInputSchema>)[]
+      Array<string | z.infer<typeof TodoGetTodosQueryInputSchema>>
     >,
     "queryKey" | "queryFn"
   >,
@@ -104,7 +105,7 @@ export function useTodoGetTodoByIdQuery(
       TodoGetTodoByIdOutputType,
       Error,
       TodoGetTodoByIdOutputType,
-      (string | z.infer<typeof TodoGetTodoByIdQueryInputSchema>)[]
+      Array<string | z.infer<typeof TodoGetTodoByIdQueryInputSchema>>
     >,
     "queryKey" | "queryFn"
   >,
@@ -369,7 +370,7 @@ export function useTodoWatchTodosSubscription(
 ) {
   /*Streams real-time updates when todos are created, updated, or deleted*/
   const sourceRef = useRef<EventSource | null>(null);
-  const [messages, setMessages] = useState<TodoWatchTodosOutputType[]>([]);
+  const [messages, setMessages] = useState<Array<TodoWatchTodosOutputType>>([]);
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
   const onErrorRef = useRef(extraOptions?.onError);

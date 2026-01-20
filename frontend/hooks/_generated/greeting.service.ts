@@ -1,4 +1,13 @@
-import { useMutation, UseMutationOptions , useQuery, UseQueryOptions } from "@tanstack/react-query";
+const getApiBaseUrl = () => {
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+  if (!baseUrl) {
+    throw new Error("EXPO_PUBLIC_API_URL environment variable is not set");
+  }
+  return baseUrl.replace(/\/$/, "");
+};
+
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import EventSource from "react-native-sse";
 import {
@@ -7,14 +16,6 @@ import {
   UseWebSocketOptions,
 } from "./useWebsocketMobile";
 import { z } from "zod";
-
-const getApiBaseUrl = () => {
-  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
-  if (!baseUrl) {
-    throw new Error("EXPO_PUBLIC_API_URL environment variable is not set");
-  }
-  return baseUrl.replace(/\/$/, "");
-};
 
 // ---- Service Name: Greeting ----
 export const GreetingSayHelloQueryInputSchema = z
@@ -33,7 +34,7 @@ export function useGreetingSayHelloQuery(
       GreetingSayHelloOutputType,
       Error,
       GreetingSayHelloOutputType,
-      (string | z.infer<typeof GreetingSayHelloQueryInputSchema>)[]
+      Array<string | z.infer<typeof GreetingSayHelloQueryInputSchema>>
     >,
     "queryKey" | "queryFn"
   >,
@@ -161,7 +162,7 @@ export function useGreetingStreamedNameSubscription(
   /*Streams the given name, letter by letter.*/
   const sourceRef = useRef<EventSource | null>(null);
   const [messages, setMessages] = useState<
-    GreetingStreamedNameOutputType[]
+    Array<GreetingStreamedNameOutputType>
   >([]);
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
