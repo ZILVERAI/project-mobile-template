@@ -14,6 +14,7 @@
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
     "@react-navigation/native": "^7.1.6",
+    "@tanstack/eslint-plugin-query": "^5.91.3",
     "@tanstack/react-query": "4",
     "expo": "^54.0.0",
     "expo-constants": "~18.0.9",
